@@ -1,4 +1,4 @@
-import { Movie } from './movies.entity';
+import { Movie } from './entities/movies.entity';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
