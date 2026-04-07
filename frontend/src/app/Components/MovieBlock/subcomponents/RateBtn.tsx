@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface RateBtnProps {
-  movieId: string;
+  movieId: string | number;
 }
 
 export default function RateBtn({ movieId }: RateBtnProps) {

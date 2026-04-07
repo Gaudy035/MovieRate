@@ -1,5 +1,5 @@
 interface ViewReviewsProps {
-  movieId: string;
+  movieId: string | number;
 }
 
 export default function ViewReviews({ movieId }: ViewReviewsProps) {

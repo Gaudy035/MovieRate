@@ -3,7 +3,7 @@ import RateBtn from './subcomponents/RateBtn';
 import ViewReviews from './subcomponents/ViewReviews';
 
 interface MovieBlockProps {
-  movieId: string;
+  movieId: string | number;
   imgUrl: string;
   movieTitle: string;
   movieDesc: string;
