@@ -3,10 +3,33 @@
 import Link from 'next/link';
 import InputTemp from '../Components/Forms/InputTemp';
 import ButtonTemp from '../Components/Forms/ButtonTemp';
+import { apiFetch } from '@/lib/api';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault;
+  const router = useRouter();
+  const [errorMessage, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await apiFetch('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      router.push('/');
+      router.refresh();
+    } catch (error: any) {
+      console.log('API error', error);
+      setError(error?.message || 'Nieprawidlowy email lub haslo');
+    }
   };
 
   return (
@@ -15,18 +38,18 @@ export default function LoginPage() {
       className='flex flex-col gap-4 justify-center items-center'
     >
       <h1 className='font-bold text-purple-900 text-2xl'>Zaloguj się</h1>
-      <InputTemp
-        type='email'
-        name='userEmail'
-        placeholder='Email'
-        label='E-mail'
-      />
+      <InputTemp type='email' name='email' placeholder='Email' label='E-mail' />
       <InputTemp
         type='password'
-        name='userPassword'
+        name='password'
         placeholder='Haslo'
         label='Haslo'
       />
+
+      {errorMessage ? (
+        <p className='text-red-600 font-semibold'>{errorMessage}</p>
+      ) : null}
+
       <ButtonTemp buttonText='Zaloguj się' />
 
       <div className='flex flex-col justify-center items-center'>
