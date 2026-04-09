@@ -3,11 +3,18 @@ import { apiFetch } from '@/lib/api';
 import { cookies } from 'next/headers';
 import Movie from '../Interfaces/Movie';
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ title?: string }>;
+}) {
+  const { title } = await searchParams;
   let movies: Movie[] = [];
 
+  const endpoint = title ? `/movies?title=${title}` : '/movies';
+
   try {
-    movies = await apiFetch('/movies', {
+    movies = await apiFetch(endpoint, {
       method: 'GET',
       cache: 'no-store',
     });

@@ -24,7 +24,7 @@ export class MoviesService {
 
   async findByTitle(title: string): Promise<Movie[]> {
     return this.movieRepository.find({
-      where: { title: ILike(`${title}%`) },
+      where: { title: ILike(`%${title}%`) },
       order: { title: 'DESC' },
     });
   }

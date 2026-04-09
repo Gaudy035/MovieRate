@@ -1,16 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Searchbar() {
   const [searchTitle, setSearchTitle] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchTitle?.trim()) {
-      console.log(`Szukam: ${searchTitle}...`);
+    if (searchTitle) {
+      router.push(`/?title=${searchTitle}`);
     } else {
-      console.log('Wpisz tytul');
+      router.push('/');
     }
   };
 
