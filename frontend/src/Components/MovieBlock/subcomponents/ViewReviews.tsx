@@ -7,7 +7,7 @@ interface ViewReviewsProps {
 export default function ViewReviews({ movieId }: ViewReviewsProps) {
   return (
     <Link
-      href={'/'}
+      href={`/Reviews?movie_id=${movieId}`}
       className='flex justify-center items-center gap-2 bg-purple-900 rounded-lg px-3 py-2 cursor-pointer '
     >
       <span className='text-white text-md font-semibold'>Wyświetl opinie</span>
