@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import InputTemp from '../Components/Forms/InputTemp';
-import ButtonTemp from '../Components/Forms/ButtonTemp';
+import InputTemp from '../../Components/Forms/InputTemp';
+import ButtonTemp from '../../Components/Forms/ButtonTemp';
 import { apiFetch } from '@/lib/api';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';

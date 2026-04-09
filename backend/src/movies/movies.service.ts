@@ -1,6 +1,6 @@
 import { Movie } from './entities/movies.entity';
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -10,11 +10,22 @@ export class MoviesService {
     private readonly movieRepository: Repository<Movie>,
   ) {}
 
-  async findall(): Promise<Movie[]> {
-    return await this.movieRepository.find({
+  async findAll(): Promise<Movie[]> {
+    return this.movieRepository.find({
       order: {
         created_at: 'DESC',
       },
+    });
+  }
+
+  async findById(movie_id: number): Promise<Movie | null> {
+    return this.movieRepository.findOne({ where: { movie_id } });
+  }
+
+  async findByTitle(title: string): Promise<Movie[]> {
+    return this.movieRepository.find({
+      where: { title: ILike(`${title}%`) },
+      order: { title: 'DESC' },
     });
   }
 }

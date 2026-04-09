@@ -1,7 +1,7 @@
 'use client';
 
-import InputTemp from '../Components/Forms/InputTemp';
-import ButtonTemp from '../Components/Forms/ButtonTemp';
+import InputTemp from '../../Components/Forms/InputTemp';
+import ButtonTemp from '../../Components/Forms/ButtonTemp';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { apiFetch } from '@/lib/api';

@@ -1,25 +1,22 @@
-'use client';
-
-import MovieBlock from './Components/MovieBlock/MovieBlock';
-import { useEffect, useState } from 'react';
+import MovieBlock from '../Components/MovieBlock/MovieBlock';
 import { apiFetch } from '@/lib/api';
-import Movie from './Interfaces/Movie';
+import { cookies } from 'next/headers';
+import Movie from '../Interfaces/Movie';
 
-export default function Home() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+export default async function Home() {
+  let movies: Movie[] = [];
 
-  useEffect(() => {
-    async function loadMovies() {
-      try {
-        const data = await apiFetch('/movies/getAll', { method: 'GET' });
-        setMovies(data);
-      } catch (error) {
-        console.log('Failed to get movies', error);
-      }
-    }
+  try {
+    movies = await apiFetch('/movies', {
+      method: 'GET',
+      cache: 'no-store',
+    });
+  } catch (error) {
+    console.log('Failed to get movies', error);
+  }
 
-    loadMovies();
-  }, []);
+  const cookieStorage = await cookies();
+  const isLoggedIn = cookieStorage.has('access_token');
 
   return (
     <div className='flex flex-col justify-center items-center'>
@@ -37,6 +34,7 @@ export default function Home() {
             movieDesc={movie.description}
             imgUrl={movie.poster_url}
             rating={5}
+            isLoggedIn={isLoggedIn}
           />
         ))}
       </div>

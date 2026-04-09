@@ -1,24 +1,15 @@
-'use client';
-
-import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface RateBtnProps {
   movieId: string | number;
+  isLoggedIn: boolean;
 }
 
-export default function RateBtn({ movieId }: RateBtnProps) {
-  const [token, setToken] = useState<string | undefined>();
-  useEffect(() => {
-    const cookieToken = Cookies.get('token');
-    setToken(cookieToken);
-  }, []);
-
+export default function RateBtn({ movieId, isLoggedIn }: RateBtnProps) {
   return (
     <Link
       className='flex justify-center items-center gap-2 bg-purple-900 rounded-lg px-3 py-2 cursor-pointer '
-      href={token ? `Rate/${movieId}` : '/Login'}
+      href={isLoggedIn ? `/rate/:${movieId}` : '/Login'}
     >
       <span className='text-white text-md font-semibold'>Dodaj opinię</span>
       <svg
