@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Review } from './entities/review.entity';
 import { AddReviewDTO } from './dtos/add-review.dto';
-import { UsersService } from '../users/users.service';
 import { GetReviewDTO } from './dtos/get-review.dto';
 
 @Injectable()
@@ -11,7 +10,6 @@ export class ReviewsService {
   constructor(
     @InjectRepository(Review)
     private readonly reviewsRepository: Repository<Review>,
-    private readonly usersService: UsersService,
   ) {}
 
   async getAvg(movie_id: number): Promise<number | null> {

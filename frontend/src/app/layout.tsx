@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={`h-full antialiased`}>
-      <body className='min-h-full flex flex-col bg-purple-900'>
+      <body className='min-h-screen flex flex-col bg-purple-900'>
         <Navbar />
         <main className='bg-white pb-12 flex-1 flex justify-center items-center'>
           {children}

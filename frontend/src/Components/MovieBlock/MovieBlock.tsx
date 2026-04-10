@@ -20,7 +20,7 @@ export default function MovieBlock({
   isLoggedIn,
 }: MovieBlockProps) {
   return (
-    <article className='grid grid-cols-4 max-w-4xl gap-4 py-1.5 mx-6'>
+    <article className='grid grid-cols-4 max-w-4xl gap-8 py-1.5 mx-6'>
       <div className='p2 flex justify-center items-center'>
         <img src={imgUrl} alt='Plakat' className='rounded-xl' />
       </div>
