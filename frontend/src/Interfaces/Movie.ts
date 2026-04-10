@@ -6,6 +6,7 @@ interface Movie {
   release_year: number;
   duration: number;
   created_at: Date;
+  average_rating: number | null;
 }
 
 export default Movie;

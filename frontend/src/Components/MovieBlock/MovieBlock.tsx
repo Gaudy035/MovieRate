@@ -7,7 +7,7 @@ interface MovieBlockProps {
   imgUrl: string;
   movieTitle: string;
   movieDesc: string;
-  rating: number;
+  averageRating: number | null;
   isLoggedIn: boolean;
 }
 
@@ -16,7 +16,7 @@ export default function MovieBlock({
   imgUrl,
   movieTitle,
   movieDesc,
-  rating,
+  averageRating,
   isLoggedIn,
 }: MovieBlockProps) {
   return (
@@ -26,7 +26,7 @@ export default function MovieBlock({
       </div>
       <div className='col-span-3 flex flex-col items-start gap-4 py-4'>
         <h2 className='font-bold text-2xl'>{movieTitle}</h2>
-        <Rating ratingScore={rating} />
+        <Rating ratingScore={averageRating} />
         <p className='h-24 line-clamp-5'>{movieDesc}</p>
         <div className='flex flex-row gap-4'>
           <RateBtn movieId={movieId} isLoggedIn={isLoggedIn} />

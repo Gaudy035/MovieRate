@@ -40,7 +40,7 @@ export default async function Home({
             movieTitle={movie.title}
             movieDesc={movie.description}
             imgUrl={movie.poster_url}
-            rating={5}
+            averageRating={movie.average_rating}
             isLoggedIn={isLoggedIn}
           />
         ))}
