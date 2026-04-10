@@ -3,7 +3,10 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 
 @Entity('t_reviews')
 export class Review {
@@ -12,6 +15,10 @@ export class Review {
 
   @Column()
   user_id!: number;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user!: User;
 
   @Column()
   movie_id!: number;

@@ -28,5 +28,5 @@ export class Movie {
   @CreateDateColumn()
   created_at!: Date;
 
-  average_rating?: number | null;
+  average_rating!: number | null;
 }
