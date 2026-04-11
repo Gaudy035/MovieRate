@@ -4,6 +4,9 @@ export class GetReviewDTO {
   @ApiProperty({ description: 'Review author' })
   username!: string;
 
+  @ApiProperty({ description: 'Reviewed movie title' })
+  movie_title!: string;
+
   @ApiPropertyOptional({ description: 'Review title' })
   title?: string;
 

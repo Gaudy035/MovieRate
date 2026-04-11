@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Review } from './entities/review.entity';
@@ -21,24 +21,31 @@ export class ReviewsService {
     user_id: number,
     addReviewDTO: AddReviewDTO,
   ): Promise<Review> {
-    const newReview = this.reviewsRepository.create({
-      user_id: user_id,
-      ...addReviewDTO,
-    });
-
-    return await this.reviewsRepository.save(newReview);
+    try {
+      const newReview = this.reviewsRepository.create({
+        user_id: user_id,
+        ...addReviewDTO,
+      });
+      return await this.reviewsRepository.save(newReview);
+    } catch (error: any) {
+      if (error.code === '23505') {
+        throw new ConflictException('You have already reviewed this movie');
+      }
+      throw error;
+    }
   }
 
   async getReviews(movie_id: number): Promise<GetReviewDTO[]> {
     const reviews = await this.reviewsRepository.find({
       where: { movie_id },
-      relations: ['user'],
+      relations: ['user', 'movie'],
       order: { created_at: 'DESC' },
     });
 
     return reviews.map((review) => {
       const output: GetReviewDTO = {
         username: review.user.username,
+        movie_title: review.movie.title,
         title: review.title,
         body: review.body,
         rating: review.rating,
