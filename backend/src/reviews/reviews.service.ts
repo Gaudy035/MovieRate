@@ -38,14 +38,14 @@ export class ReviewsService {
   async getReviews(movie_id: number): Promise<GetReviewDTO[]> {
     const reviews = await this.reviewsRepository.find({
       where: { movie_id },
-      relations: ['user', 'movie'],
+      relations: ['user'],
       order: { created_at: 'DESC' },
     });
 
     return reviews.map((review) => {
       const output: GetReviewDTO = {
+        review_id: review.review_id,
         username: review.user.username,
-        movie_title: review.movie.title,
         title: review.title,
         body: review.body,
         rating: review.rating,

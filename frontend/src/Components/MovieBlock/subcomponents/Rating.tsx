@@ -4,7 +4,7 @@ interface RatingProps {
 
 export default function Rating({ ratingScore }: RatingProps) {
   return (
-    <div className='flex justify-center items-center gap-2'>
+    <div className='flex justify-center items-center gap-1'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'

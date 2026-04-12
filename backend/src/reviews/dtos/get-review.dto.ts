@@ -1,11 +1,14 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GetReviewDTO {
+  @ApiProperty({ description: 'Review ID' })
+  review_id!: number;
+
   @ApiProperty({ description: 'Review author' })
   username!: string;
 
-  @ApiProperty({ description: 'Reviewed movie title' })
-  movie_title!: string;
+  // @ApiProperty({ description: 'Reviewed movie title' })
+  // movie_title!: string;
 
   @ApiPropertyOptional({ description: 'Review title' })
   title?: string;

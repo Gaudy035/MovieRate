@@ -21,6 +21,7 @@ export default function InputTemp({
         name={name}
         id={name}
         placeholder={placeholder}
+        required
         className='border rounded-xl py-1 px-3 focus:scale-105 transition duration-200'
       />
     </div>
