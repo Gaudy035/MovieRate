@@ -18,7 +18,7 @@ export default function RegisterPage() {
     const payload = Object.fromEntries(formData.entries());
 
     try {
-      const response = await apiFetch('/auth/register', {
+      await apiFetch('/auth/register', {
         method: 'POST',
         body: JSON.stringify(payload),
       });
@@ -55,6 +55,9 @@ export default function RegisterPage() {
         placeholder='Hasło'
         label='Hasło'
       />
+
+      {errorMessage ? <p className='text-red-600'>{errorMessage}</p> : null}
+
       <ButtonTemp buttonText='Zarejestruj się' />
     </form>
   );

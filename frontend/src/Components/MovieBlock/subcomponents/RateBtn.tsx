@@ -9,7 +9,7 @@ export default function RateBtn({ movieId, isLoggedIn }: RateBtnProps) {
   return (
     <Link
       className='flex justify-center items-center gap-2 bg-purple-900 rounded-lg px-3 py-2 cursor-pointer '
-      href={isLoggedIn ? `/Rate/:${movieId}` : '/Login'}
+      href={isLoggedIn ? `/Reviews/Rate?movie_id=${movieId}` : '/Login'}
     >
       <span className='text-white text-md font-semibold'>Dodaj opinię</span>
       <svg

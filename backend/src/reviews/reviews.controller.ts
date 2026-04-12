@@ -30,18 +30,17 @@ export class ReviewsController {
     return this.reviewsService.getReviews(movie_id);
   }
 
-  //   @Get('avg/:movie_id')
-  //   async getAvg(@Param('movie_id', ParseIntPipe) movie_id: number) {
-  //     return this.reviewsService.getAvg(movie_id);
-  //   }
-
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Post('add')
+  @Post('add/:movie_id')
   @ApiOperation({ summary: 'Adds new review' })
   @ApiResponse({ status: 201 })
-  async addReview(@Req() req: any, @Body() reviewDTO: AddReviewDTO) {
+  async addReview(
+    @Req() req: any,
+    @Param('movie_id', ParseIntPipe) movie_id: number,
+    @Body() reviewDTO: AddReviewDTO,
+  ) {
     const userId = req.user.sub;
-    return this.reviewsService.addReview(userId, reviewDTO);
+    return this.reviewsService.addReview(userId, { ...reviewDTO, movie_id });
   }
 }

@@ -19,7 +19,7 @@ export default function LoginPage() {
     const payload = Object.fromEntries(formData.entries());
 
     try {
-      const response = await apiFetch('/auth/login', {
+      await apiFetch('/auth/login', {
         method: 'POST',
         body: JSON.stringify(payload),
       });
@@ -46,9 +46,7 @@ export default function LoginPage() {
         label='Haslo'
       />
 
-      {errorMessage ? (
-        <p className='text-red-600 font-semibold'>{errorMessage}</p>
-      ) : null}
+      {errorMessage ? <p className='text-red-600'>{errorMessage}</p> : null}
 
       <ButtonTemp buttonText='Zaloguj się' />
 
