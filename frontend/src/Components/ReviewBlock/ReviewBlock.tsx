@@ -19,7 +19,7 @@ export default function ReviewBlock({
   const [y, m, d] = dateString.slice(0, 10).split('-');
   const date = `${d}-${m}-${y}`;
   return (
-    <article className='flex flex-col gap-2 w-3/5 px-6 py-4'>
+    <article className='flex flex-col gap-2 w-3/5 px-6 py-4 border-2 border-purple-900 rounded-2xl'>
       <div className='grid grid-cols-3 w-full'>
         <p className='font-semibold text-lg'>{username}</p>
         <Rating ratingScore={rating} />
