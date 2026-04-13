@@ -4,17 +4,37 @@ import {
   ApiOperation,
   ApiConflictResponse,
   ApiUnauthorizedResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
-import { Controller, Post, Body, Res } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Patch,
+  Body,
+  Res,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { LoginDTO } from '../users/dtos/login.dto';
 import { CreateUserDTO } from '../users/dtos/create-user.dto';
 import { AuthService } from './auth.service';
 import type { Response } from 'express';
+import { AuthGuard } from './auth.guard';
+import { EmailChangeDTO } from '../users/dtos/email-change.dto';
+import { PasswordChangeDTO } from '../users/dtos/password-change.dto';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  private clearCookie(res: Response) {
+    res.cookie('access_token', '', {
+      httpOnly: true,
+      expires: new Date(0),
+      path: '/',
+    });
+  }
 
   @Post('register')
   @ApiOperation({ summary: 'Registers new user' })
@@ -46,12 +66,43 @@ export class AuthController {
   @ApiOperation({ summary: 'User logout' })
   @ApiResponse({ status: 200, description: 'User logged out' })
   async logout(@Res({ passthrough: true }) res: Response) {
-    res.cookie('access_token', '', {
-      httpOnly: true,
-      expires: new Date(0),
-      path: '/',
-    });
+    this.clearCookie(res);
     return { message: 'User logged out successfully' };
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Patch('change-email')
+  @ApiOperation({ summary: 'User email change' })
+  @ApiResponse({ status: 200, description: 'Email changed successfully' })
+  @ApiUnauthorizedResponse({ description: 'Incorrect password' })
+  @ApiConflictResponse({ description: 'Email is already taken' })
+  async changeEmail(
+    @Req() req: any,
+    @Body() emailChangeDTO: EmailChangeDTO,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const userId = req.user.sub;
+    await this.authService.changeEmail(userId, emailChangeDTO);
+    this.clearCookie(res);
+    return { message: 'Email changed successfully' };
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Patch('change-password')
+  @ApiOperation({ summary: 'User password change' })
+  @ApiResponse({ status: 200, description: 'Password changed successfully' })
+  @ApiUnauthorizedResponse({ description: 'Incorrect password' })
+  async changePassword(
+    @Req() req: any,
+    @Body() passwordChangeDTO: PasswordChangeDTO,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const userId = req.user.sub;
+    await this.authService.changePassword(userId, passwordChangeDTO);
+    this.clearCookie(res);
+    return { message: 'Password changed successfully' };
   }
 
   private setCookie(res: Response, token: string) {

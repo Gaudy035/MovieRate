@@ -7,6 +7,8 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDTO } from '../users/dtos/create-user.dto';
 import { LoginDTO } from '../users/dtos/login.dto';
+import { EmailChangeDTO } from '../users/dtos/email-change.dto';
+import { PasswordChangeDTO } from '../users/dtos/password-change.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -56,5 +58,52 @@ export class AuthService {
 
     const payload = { sub: user.user_id, email: user.email };
     return { access_token: await this.jwtService.signAsync(payload) };
+  }
+
+  async changeEmail(userId: number, emailChangeDTO: EmailChangeDTO) {
+    const user = await this.usersService.findById(userId);
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const pwdMatch = await bcrypt.compare(
+      emailChangeDTO.password,
+      user.password,
+    );
+    if (!pwdMatch) {
+      throw new UnauthorizedException('Incorrect password');
+    }
+
+    const emailTaken = await this.usersService.findByEmail(
+      emailChangeDTO.new_email,
+    );
+    if (emailTaken) {
+      throw new ConflictException('Email is already taken');
+    }
+
+    return this.usersService.updateEmail(userId, emailChangeDTO.new_email);
+  }
+
+  async changePassword(userId: number, passwordChangeDTO: PasswordChangeDTO) {
+    const user = await this.usersService.findById(userId);
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const pwdMatch = await bcrypt.compare(
+      passwordChangeDTO.password,
+      user.password,
+    );
+    if (!pwdMatch) {
+      throw new UnauthorizedException('Incorrect password');
+    }
+
+    const saltRounds = 10;
+    const new_password = await bcrypt.hash(
+      passwordChangeDTO.new_password,
+      saltRounds,
+    );
+
+    return this.usersService.updatePassword(userId, new_password);
   }
 }
