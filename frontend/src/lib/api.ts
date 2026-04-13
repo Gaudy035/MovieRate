@@ -1,4 +1,8 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const isServer = typeof window === 'undefined';
+
+const BASE_URL = isServer
+  ? process.env.API_URL_SERVER
+  : process.env.NEXT_PUBLIC_API_URL_CLIENT;
 
 export async function apiFetch(endpoint: string, options: RequestInit = {}) {
   const defaultHeaders: Record<string, string> = {
