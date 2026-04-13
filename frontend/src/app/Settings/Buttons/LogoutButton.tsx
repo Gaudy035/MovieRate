@@ -17,7 +17,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={() => hanleLogout()}
-      className='text-red-600 cursor-pointer font-semibold'
+      className='text-red-600 cursor-pointer hover:scale-105 transition duration-200'
     >
       Wyloguj się
     </button>

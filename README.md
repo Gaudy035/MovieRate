@@ -7,6 +7,7 @@ Full-stack movie rating web application built with **Next.js, Nest.js and Postgr
 - **User authentication** - User authentication using JWT and HTTP only cookies.
 - **Movie browsing** - Filtering movies in database by title.
 - **Review system** - Viewing and writing reviews for movies.
+- **Interactive documentation** - Interactive docs generated via Swagger UI available at `/docs`.
 
 ## Tech stack
 
@@ -18,7 +19,7 @@ Full-stack movie rating web application built with **Next.js, Nest.js and Postgr
 
 ### .env files
 
-Every required .env have .env.example showing how the file should look like
+Each required .env file has a corresponding .env.example showing how the file should look like
 
 #### root .env
 
@@ -34,16 +35,16 @@ Variables used by database container in Docker
 
 Backend variables
 
-| Variable    | Description                                             |
-| ----------- | ------------------------------------------------------- |
-| PORT        | Port that backend will on while running on local server |
-| ORIGIN_URL  | URL of frontend                                         |
-| DB_HOST     | Host on which database server runs                      |
-| DB_PORT     | Port on which database server runs                      |
-| DB_USERNAME | User that backend will use to connect to database       |
-| DB_PASSWORD | Database user password                                  |
-| DB_NAME     | Name of the database used by app                        |
-| JWT_SECRET  | Secret key used by JWT                                  |
+| Variable    | Description                                       |
+| ----------- | ------------------------------------------------- |
+| PORT        | Port that backend will run on locally             |
+| ORIGIN_URL  | URL of frontend                                   |
+| DB_HOST     | Host where the database server runs               |
+| DB_PORT     | Port on which database server runs                |
+| DB_USERNAME | User that backend will use to connect to database |
+| DB_PASSWORD | Database user password                            |
+| DB_NAME     | Name of the database used by app                  |
+| JWT_SECRET  | Secret key used by JWT                            |
 
 #### frontend/.env
 
@@ -78,7 +79,7 @@ docker-compose down
 
 #### Database
 
-Replace `db_name` and `db_user` by Names of database and user that you are going to use with th app.
+Replace `db_name` and `db_user` by Names of database and user that you are going to use with the app.
 
 1. Create a database
 
