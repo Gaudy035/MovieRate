@@ -19,6 +19,7 @@ services:
     env_file:
       - ./backend/.env
     environment:
+      PORT: '3001'
       DB_HOST: db
     ports:
       - '3001:3001'
