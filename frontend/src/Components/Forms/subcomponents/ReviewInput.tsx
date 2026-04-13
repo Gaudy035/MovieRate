@@ -3,7 +3,6 @@ interface ReviewInputProps {
   placeholder: string;
   name: string;
   label: string;
-  optional?: boolean;
 }
 
 export default function ReviewInput({
@@ -11,7 +10,6 @@ export default function ReviewInput({
   placeholder,
   name,
   label,
-  optional,
 }: ReviewInputProps) {
   return (
     <div className='flex flex-col justify-center items-start gap-1 w-4/5'>
@@ -23,7 +21,6 @@ export default function ReviewInput({
         name={name}
         id={name}
         placeholder={placeholder}
-        required={!optional}
         className='border rounded-xl py-1 px-3 w-full focus:scale-102 transition duration-200'
       />
     </div>

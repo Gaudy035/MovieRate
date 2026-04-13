@@ -20,7 +20,7 @@ export default function Rating({ ratingScore }: RatingProps) {
         />
       </svg>
       <span className='text-lg font-semibold'>
-        {ratingScore ? `${ratingScore} / 10` : 'Brak recenzji'}
+        {ratingScore ? `${ratingScore} / 10` : 'Brak opinii'}
       </span>
     </div>
   );

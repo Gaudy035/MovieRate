@@ -44,16 +44,20 @@ export default async function ReviewsPage({
       </div>
       {/* Opinie */}
       <div className='flex flex-col justify-center items-center gap-8 w-full'>
-        {reviews.map((review) => (
-          <ReviewBlock
-            key={review.review_id}
-            username={review.username}
-            title={review.title}
-            body={review.body}
-            rating={review.rating}
-            created_at={review.created_at}
-          />
-        ))}
+        {reviews.length > 0 ? (
+          reviews.map((review) => (
+            <ReviewBlock
+              key={review.review_id}
+              username={review.username}
+              title={review.title}
+              body={review.body}
+              rating={review.rating}
+              created_at={review.created_at}
+            />
+          ))
+        ) : (
+          <p className='text-3xl'>Brak opinii</p>
+        )}
       </div>
     </div>
   );
