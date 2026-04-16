@@ -1,0 +1,11 @@
+dist
+coverage
+node_modules
+.env
+.env.example
+.prettierrc
+Dockerfile
+.dockerignore
+.git
+.gitignore
+README.md
