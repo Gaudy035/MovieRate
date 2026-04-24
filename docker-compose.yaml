@@ -29,6 +29,8 @@ services:
   frontend:
     build:
       context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL_CLIENT: http://localhost:3001
     container_name: movierate_frontend
     restart: unless-stopped
     env_file:
