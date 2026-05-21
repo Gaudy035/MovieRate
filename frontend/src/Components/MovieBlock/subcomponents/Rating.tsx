@@ -1,5 +1,5 @@
 interface RatingProps {
-  ratingScore: string | number;
+  ratingScore: string | number | null;
 }
 
 export default function Rating({ ratingScore }: RatingProps) {
