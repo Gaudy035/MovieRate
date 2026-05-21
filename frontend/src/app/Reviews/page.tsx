@@ -29,7 +29,9 @@ export default async function ReviewsPage({
         <div className='col-span-2 py-8 flex flex-col justify-start items-start gap-2'>
           <h1 className='font-bold text-3xl'>{movie.title}</h1>
           <p className='font-semibold text-2xl'>
-            {avgRating ? `Średnia ocen: ${avgRating} / 10` : 'Brak recenzji'}
+            {avgRating
+              ? `Średnia ocen: ${Number(avgRating).toFixed(1)} / 10`
+              : 'Brak recenzji'}
           </p>
           <p className='font-semibold text-xl'>
             Czas Trwania: {movie.duration}

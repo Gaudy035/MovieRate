@@ -26,7 +26,7 @@ export default function MovieBlock({
       </div>
       <div className='col-span-3 flex flex-col items-start gap-4 py-4'>
         <h2 className='font-bold text-2xl'>{movieTitle}</h2>
-        <Rating ratingScore={averageRating} />
+        <Rating ratingScore={Number(averageRating).toFixed(1)} />
         <p className='h-24 line-clamp-5'>{movieDesc}</p>
         <div className='flex flex-row gap-4'>
           <RateBtn movieId={movieId} isLoggedIn={isLoggedIn} />
