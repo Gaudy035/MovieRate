@@ -84,13 +84,29 @@ Replace `db_name` and `db_user` by Names of database and user that you are going
 1. Create a database
 
 ```bash
-createdb db_name
+sudo -u db_user psql
+create database db_name;
+\q
+```
+
+or
+
+```bash
+psql -U db_user
+create database db_name;
+\q
 ```
 
 2. Run database script
 
 ```bash
 psql -U db_user -d db_name -f ./db/script.sql
+```
+
+or
+
+```bash
+sudo -u db_user psql -d db_name -f ./db/script.sql
 ```
 
 #### Backend
