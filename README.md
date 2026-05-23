@@ -55,7 +55,7 @@ Frontend variables
 | API_URL_SERVER             | URL used by server components to call backend |
 | NEXT_PUBLIC_API_URL_CLIENT | URL used by client components to call backend |
 
-### Docker
+### Starting
 
 When starting for the first time run:
 
@@ -73,68 +73,4 @@ To stop the app run
 
 ```bash
 docker-compose down
-```
-
-### Local server
-
-#### Database
-
-Replace `db_name` and `db_user` by Names of database and user that you are going to use with the app.
-
-1. Create a database
-
-```bash
-sudo -u db_user psql
-create database db_name;
-\q
-```
-
-or
-
-```bash
-psql -U db_user
-create database db_name;
-\q
-```
-
-2. Run database script
-
-```bash
-psql -U db_user -d db_name -f ./db/script.sql
-```
-
-or
-
-```bash
-sudo -u db_user psql -d db_name -f ./db/script.sql
-```
-
-#### Backend
-
-1. Install node dependencies
-
-```bash
-cd backend
-npm install --legacy-peer-deps
-```
-
-2. With dependencies installed run:
-
-```bash
-npm run start:dev
-```
-
-#### Frontend
-
-1. Install node dependencies
-
-```bash
-cd frontend
-npm install --legacy-peer-deps
-```
-
-2. With dependencies installed run:
-
-```bash
-npm run dev
 ```
