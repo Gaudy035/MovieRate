@@ -11,9 +11,9 @@ Full-stack movie rating web application built with **Next.js, Nest.js and Postgr
 
 ## Tech stack
 
-- **Frontend** - Next.js, TypeScript, tailwind.css
-- **Backend** - Nest.js, TypeORM, passport.js
-- **Database** - PostgreSQL
+- **Frontend** (Port:3000) - Next.js, TypeScript, tailwind.css
+- **Backend** (Port:3001) - Nest.js, TypeORM, passport.js
+- **Database** (Port:5433) - PostgreSQL
 
 ## Setting up
 
